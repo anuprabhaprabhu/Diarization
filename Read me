@@ -1,0 +1,45 @@
+#####           SPEAKER DIARIZATION         ######
+
+
+step 1 : ".wav"  convertion
+
+		* To convert other formats to wav -----> ffmpeg -i s2.aac s2.wav
+
+		* To downsample 48k to 8k -------->   ffmpeg -i SPK_028.wav -ar 8000 28_8k.wav
+
+		* Not working for 44.1k
+
+		# soxi --->> Input File     : 's2.wav'
+				# Channels       : 1
+				# Sample Rate    : 8000
+				# Precision      : 16-bit
+				# Duration       : 00:03:14.56 = 1556480 samples ~ 14592 CDDA sectors
+				# File Size      : 3.11M
+				# Bit Rate       : 128k
+				# Sample Encoding: 16-bit Signed Integer PCM
+
+
+
+step 2 : generate ".rttm" (takes time)
+
+		use "diar.py"
+
+
+step 3 : split speakers 
+
+		use "split_ramp.py" --> set split=1, creates speaker_00 & speaker_01 folders in ***_split folder
+
+		manually check for overlaps, noise etc., and discard files if necessary.
+
+
+step 4 : Ramp up and down
+
+		use "split_ramp.py" --> set split=0, creates speaker_00 & speaker_01 folders in ***_ramp folder
+
+		and also creates "speaker_00_total.wav" and "speaker_00_total_ff.wav" 
+		
+step 5 : Final check
+
+		soxi speaker_00_total_ff.wav   --> check for A-law, 8k etc.,
+
+		check for ramp up and down(transients should not be there).
