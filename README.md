@@ -3,7 +3,21 @@
 
 step 1 : ".wav"  convertion
 
-		ffmpeg -i Zaid.mpga -acodec pcm_alaw -sample_fmt s16 -ar 8000 Zaid.wav
+		* To convert other formats to wav -----> ffmpeg -i s2.aac s2.wav
+
+		* To downsample 48k to 8k -------->   ffmpeg -i SPK_028.wav -ar 8000 28_8k.wav
+
+		* Not working for 44.1k
+
+		# soxi --->> Input File     : 's2.wav'
+				# Channels       : 1
+				# Sample Rate    : 8000
+				# Precision      : 16-bit
+				# Duration       : 00:03:14.56 = 1556480 samples ~ 14592 CDDA sectors
+				# File Size      : 3.11M
+				# Bit Rate       : 128k
+				# Sample Encoding: 16-bit Signed Integer PCM
+
 
 
 step 2 : generate ".rttm" (takes time)
@@ -29,3 +43,4 @@ step 5 : Final check
 		soxi speaker_00_total_ff.wav   --> check for A-law, 8k etc.,
 
 		check for ramp up and down(transients should not be there).
+
